@@ -1,10 +1,12 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.entity.BudgetDetails;
 import com.app.entity.Company;
 import com.app.repository.CompanyRepository;
 
@@ -35,7 +37,14 @@ public class CompanyService {
 	}
 
 	// delete
-	public void deletebyId(Integer id) {
-		companyRepository.deleteById(id);
+	public String deletebyId(Integer id) {
+		Optional<Company> details = this.companyRepository.findById(id);
+
+		if (details.isEmpty()) {
+			return "This ID doesn't exist";
+		}
+
+		this.companyRepository.deleteById(id);
+		return "Deleted successfully";
 	}
 }

@@ -1,10 +1,12 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.entity.Company;
 import com.app.entity.Notification;
 import com.app.repository.NotificationRepository;
 
@@ -25,17 +27,24 @@ public class NotificationService {
 	}
 
 	// update
-	public Notification update(Integer id, Notification notification) {
+	public Notification update(Integer id, Notification updatedNotification) {
 		if (notificationRepository.existsById(id)) {
-			notification.setSeqid(id);
-			return notificationRepository.save(notification);
+			updatedNotification.setSeqid(id);
+			return notificationRepository.save(updatedNotification);
 		} else {
 			throw new RuntimeException("Notification not found with id " + id);
 		}
 	}
 
 	// delete
-	public void deletebyId(Integer id) {
-		notificationRepository.deleteById(id);
+	public String deletebyId(Integer id) {
+		Optional<Notification> details = this.notificationRepository.findById(id);
+
+		if (details.isEmpty()) {
+			return "This ID doesn't exist";
+		}
+
+		this.notificationRepository.deleteById(id);
+		return "Deleted successfully";
 	}
 }

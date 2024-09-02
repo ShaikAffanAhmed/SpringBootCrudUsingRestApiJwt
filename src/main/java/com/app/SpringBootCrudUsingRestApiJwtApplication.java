@@ -8,6 +8,7 @@ public class SpringBootCrudUsingRestApiJwtApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootCrudUsingRestApiJwtApplication.class, args);
+		System.out.println("started");
 	}
 
 }

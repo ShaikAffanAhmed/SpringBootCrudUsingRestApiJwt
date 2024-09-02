@@ -39,7 +39,12 @@ public class BudgetDetailsController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public void deleteBudgetDetails(@PathVariable Integer id) {
-		detailsService.deleteById(id);
+	public String deleteBudgetDetails(@PathVariable Integer id) {
+	return 	detailsService.deleteById(id);
+	}
+	
+	@PostMapping("/insertWithNotification")
+	public String creatBudgetDetailsWithNotification() {
+		return detailsService.saveWithNotification();
 	}
 }

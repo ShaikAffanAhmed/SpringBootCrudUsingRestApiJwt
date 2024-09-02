@@ -39,7 +39,8 @@ public class PropertyGroupController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public void deletePropertyGroup(@PathVariable Integer id) {
-		groupService.deletebyId(id);
+	public String deletePropertyGroup(@PathVariable Integer id) {
+		return groupService.deletebyId(id);
+		
 	}
 }

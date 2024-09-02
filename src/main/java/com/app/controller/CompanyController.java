@@ -38,8 +38,8 @@ public class CompanyController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public void deleteCompany(@PathVariable Integer id) {
-		companyService.deletebyId(id);
+	public String deleteCompany(@PathVariable Integer id) {
+		return companyService.deletebyId(id);
 	}
 	
 }

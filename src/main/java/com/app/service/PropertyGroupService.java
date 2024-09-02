@@ -1,10 +1,12 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.entity.Company;
 import com.app.entity.PropertyGroup;
 import com.app.repository.PropertyGroupRepository;
 
@@ -35,7 +37,15 @@ public class PropertyGroupService {
 	}
 
 	// delete
-	public void deletebyId(Integer id) {
-		groupRepository.deleteById(id);
+	public String deletebyId(Integer id) {
+
+		Optional<PropertyGroup> details = this.groupRepository.findById(id);
+
+		if (details.isEmpty()) {
+			return "This ID doesn't exist";
+		}
+
+		this.groupRepository.deleteById(id);
+		return "Deleted successfully";
 	}
 }

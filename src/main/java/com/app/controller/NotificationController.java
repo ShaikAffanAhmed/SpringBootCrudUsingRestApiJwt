@@ -34,13 +34,13 @@ public class NotificationController {
 
 	@PutMapping("/update/{id}")
 	public Notification updateNotification(@PathVariable Integer id, @RequestBody Notification notification) {
-		notification.setSeqid(id);
-		return notificationService.save(notification);
+		
+		return notificationService.update(id,notification);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public void deleteNotification(@PathVariable Integer id) {
-		notificationService.deletebyId(id);
+	public String deleteNotification(@PathVariable Integer id) {
+		return notificationService.deletebyId(id);
 	}
 
 }
